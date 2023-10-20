@@ -1,45 +1,247 @@
-<!-- Please do not change this logo with link -->
+<!-- Please do not change this html logo with link -->
 
-[![MCHP](images/microchip.png)](https://www.microchip.com)
+<a href="https://www.microchip.com" rel="nofollow"><img src="images/microchip.png" alt="MCHP" width="300"/></a>
 
-# Update the title for pic18f56q24-getting-started-with-mvio-mplab-mcc here
+# Multi-Voltage Input / Output (MVIO) in three different examples using PIC18F56Q24 Microcontroller generated with MCC Melody
 
-<!-- This is where the introduction to the example goes, including mentioning the peripherals used -->
+<br>The repository contains three MPLAB® X projects:
+
+- [1. MVIO 1 Logic](#1-mvio-1-logic) This use case shows how to configure two output pins that provide different output voltage levels: 3.3V for a non-MVIO pin and 5V for an MVIO pin.
+- [2. MVIO Interrupt](#2-mvio-interrupt) This use case shows how to configure the MVIO interrupt and turn on the on-board LED when the voltage drops below the acceptable threshold.
+- [3. MVIO Read Voltage](#3-mvio-read-voltage) This use case shows how to read the voltage on VDDIO2 with the ADC, and then send it through USART.
 
 ## Related Documentation
 
-<!-- Any information about an application note or tech brief can be linked here. Use unbreakable links!
-     In addition a link to the device family landing page and relevant peripheral pages as well:
-     - [AN3381 - Brushless DC Fan Speed Control Using Temperature Input and Tachometer Feedback](https://microchip.com/00003381/)
-     - [PIC18F-Q10 Family Product Page](https://www.microchip.com/design-centers/8-bit/pic-mcus/device-selection/pic18f-q10-product-family) -->
+More details and code examples on the PIC18F56Q24 can be found at the following links:
+
+- [PIC18F56Q24 Product Page](https://www.microchip.com/wwwproducts/en/PIC18F56Q24)
+- [PIC18F56Q24 Code Examples on GitHub](https://github.com/microchip-pic-PIC-examples?q=PIC18F56Q24)
+
 
 ## Software Used
 
-<!-- All software used in this example must be listed here. Use unbreakable links!
-     - MPLAB® X IDE 5.30 or newer [(microchip.com/mplab/mplab-x-ide)](http://www.microchip.com/mplab/mplab-x-ide)
-     - MPLAB® XC8 2.10 or a newer compiler [(microchip.com/mplab/compilers)](http://www.microchip.com/mplab/compilers)
-     - MPLAB® Code Configurator (MCC) 3.95.0 or newer [(microchip.com/mplab/mplab-code-configurator)](https://www.microchip.com/mplab/mplab-code-configurator)
-     - MPLAB® Code Configurator (MCC) Device Libraries PIC10 / PIC12 / PIC16 / PIC18 MCUs [(microchip.com/mplab/mplab-code-configurator)](https://www.microchip.com/mplab/mplab-code-configurator)
-     - Microchip PIC18F-Q Series Device Support (1.4.109) or newer [(packs.download.microchip.com/)](https://packs.download.microchip.com/) -->
-
-- MPLAB® X IDE 6.15.0 or newer [(MPLAB® X IDE 6.15)](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic18f56q24-getting-started-with-mvio-mplab-mcc-github)
-- MPLAB® XC8 2.45.0 or newer compiler [(MPLAB® XC8 2.45)](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_MPAE_Examples&utm_content=pic18f56q24-getting-started-with-mvio-mplab-mcc-github)
+- [MPLAB® X IDE](http://www.microchip.com/mplab/mplab-x-ide) v6.15 or newer
+- [MPLAB® XC8](http://www.microchip.com/mplab/compilers) v2.45 or newer
+- [PIC18F-Q_DFP Series Device Pack](https://packs.download.microchip.com/) v1.23.425 or newer
+- [MPLAB® Code Configurator Melody](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator/melody) core 1.13.713 or newer
 
 ## Hardware Used
 
-<!-- All hardware used in this example must be listed here. Use unbreakable links!
-     - PIC18F47Q10 Curiosity Nano [(DM182029)](https://www.microchip.com/Developmenttools/ProductDetails/DM182029)
-     - Curiosity Nano Base for Click boards™ [(AC164162)](https://www.microchip.com/Developmenttools/ProductDetails/AC164162)
-     - POT Click board™ [(MIKROE-3402)](https://www.mikroe.com/pot-click) -->
+- The PIC18F56Q24 Curiosity Nano Development Board is used as test platform.
+  
+<br><img src="images/56Q24-Board.png">
 
-## Setup
+## Prerequisites
 
-<!-- Explain how to connect hardware and set up software. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
+For MVIO to work in case the Curiosity Nano board is used for these examples, disconnect the R201 resistor connecting VDDIO2 to VCC_TARGET.
+
+<br><img src="images/56Q24-MVIO-BOARD.png">
+
+A power supply must be connected to the VDDIO2 pin. There are two possible use cases:
+<br />
+**a.** Connecting an external DC power supply to the VDDIO2 pin and GND.
+<br />
+**b.** Using Curiosity Nano, use VBUS as power supply, simply by connecting a wire between VBUS and VDDIO2.
+
+## INITIAL SETUP
+
+These following configurations are set for each lab.
+
+<br><img src="images/CLOCK-CONFIG.png">
+  
+  - Clock Source: HFINTOSC 
+  - Internal Clock: 4 Mhz
+  - Clock Divider: 1
+    
+<br><img src="images/CONFIG1.png">
+
+  - External Oscillator Disabled
+  - Reset Oscillator 4 Mhz
 
 ## Operation
 
-<!-- Explain how to operate the example. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
+To program the Curiosity Nano board with this MPLAB® X project, follow the steps provided in the [How to Program Curiosity Nano board](#how-to-program-curiosity-nano-board) chapter.<br><br>
 
-## Summary
+## 1. MVIO 1 Logic
 
-<!-- Summarize what the example has shown -->
+This program demonstrates the functionality of the MVIO pins of the PIC®  microcontrollers. It configures two output high (logic `1`) pins; one is an MVIO pin and the other one is a non-MVIO. 
+
+**Note**: VDDIO2 is connected to VBUS on the PIC Curiosity Nano board.
+
+By using a voltmeter, it can be observed that the microcontroller is generating 3.3V on the non-MVIO pin and 5V on the MVIO pin. 
+
+This simple example uses the pins as GPIO pins but other peripherals (such as I<sup>2</sup>C, SPI, USART, Timers and so on) would also have different voltage values for logic `1`, on MVIO and non-MVIO pins. 
+
+This adds a lot of flexibility to the PIC® family, allowing the devices to communicate with sensors/MPUs/SoCs at different operating levels, without needing external components such as level shifters.
+
+### 1.1 Setup
+
+|Pin                       | Configuration      |
+|   ---------------------  |   ---------------- |
+| RB4 - non-MVIO           | Digital Output     |
+| RC4 - MVIO               | Digital Output     |
+
+
+### 1.2 Demo
+
+<br><img src="images/LOGIC.gif">
+
+This gif shows the output voltage levels on the non-MVIO pin (3.3V) and on the MVIO pin (5V).
+
+### 1.3 Summary
+
+This program demonstrates the difference between the MVIO and non-MVIO pins, both set as output, the first one having a 3.3V output level and the second one a 5V output level.<br><br>
+[Back to top](#multi-voltage-input--output-mvio-in-three-different-examples-using-PIC18F56Q24-microcontroller-generated-with-mcc-melody)<br>
+
+## 2. MVIO Interrupt
+
+This program demonstrates the functionality of the MVIO status interrupt. 
+
+**Note**: VDDIO2 is connected to an external and adjustable power supply.
+
+When the VDDIO2 voltage level falls below the acceptable threshold (of about 1.6V-5.5V), the status bit changes and an interrupt is issued. When the VDDIO2 voltage raises above the threshold, the status bit will change again, issuing another interrupt.
+
+For this example, the on-board LED is turned on as long as the voltage is outside the threshold and turned off when the VDDIO2 is inside the threshold. 
+
+### 2.1 Setup
+
+|Pin                       | Configuration      |
+| :---------------------:  | :----------------: |
+| RF2 (LED pin)            | Digital output     |
+
+
+
+This example requires the RDY interuppt to be enabled, which can be done in the interrupt tab in MCC, or enabled by code.
+
+### MCC
+
+<br><img src="images/INTERRUPT-TABLE.png">
+
+The figure above shows what it looks like when the RDY interrupt is enabled.
+
+### Code
+To implement using code the following lines were added. An ISR and an Interrupt Manager.
+
+```
+static void MVIO_ISR(void)
+{                  
+    LATFbits.LATF2 = 0;   
+}
+```
+
+```
+  void __interrupt() INTERRUPT_InterruptManager (void)
+  {
+    /* Check if MVIO_RDY interrupt is enabled and if the interrupt flag is set */
+    if(PIE11bits.VDDIO2nRDYIE == 1 && PIR11bits.VDDIO2nRDYIF == 1)
+    
+    {
+        PIR11bits.VDDIO2nRDYIF = 0;
+        MVIO_ISR();
+       __delay_ms(50);
+        
+    }
+  }
+```
+
+
+
+### 2.2 Demo
+
+<br><img src="images/INTERRUPT.gif">
+
+<br> This gif shows what happens when the VDDIO2 voltage drops below the MVIO threshold. In this example, a wire is placed between the VDDIO2 and the VBUS, that is used as a power supply (5V) - the LED is turned off. The wire is then unplugged (0V) - the LED is turned on.
+
+### 2.3 Summary
+
+This program demonstrates the use of the MVIO interrupt to turn on an LED when the voltage applied to MVIO is too low. <br><br>
+[Back to top](#multi-voltage-input--output-mvio-in-three-different-examples-using-PIC18F56Q24-microcontroller-generated-with-mcc-melody)<br>
+
+## 3. MVIO Read Voltage
+
+This program reads the voltage on VDDIO2 using an internal ADC channel connected to it. 
+
+It is possible that the ADC operates at a voltage lower than the MVIO. To be able to handle such cases, the ADC channel connected to MVIO provides the VDDIO2 voltage divided by 10. This means that the ADC measures a voltage ten times smaller than the actual voltage, this way it can safely handle the case when VDDIO2 is greater than VDD.
+
+**Note**: A power supply must be connected to the VDDIO2 pin. There are two possible use cases:
+<br />
+**a.** Connecting an external DC power supply to the VDDIO2 pin and GND.
+<br />
+**b.** Using Curiosity Nano, use VBUS as power supply, simply by connecting a wire between VBUS and VDDIO2. 
+
+The program than converts the reading into the actual voltage and sends it over USART, every 500ms.
+
+## 3.1 Setup
+
+<br><img src="images/ADC-CONFIG.png">
+  
+  - Basic Mode
+  - Right Alignment
+  - Positive Input Channel: VDDIO2_by_10
+  - Clock Source: ADCRC
+
+    
+
+<br><img src="images/uart2_plib_config.png">
+ 
+ - UART dependency: UART 2
+  
+<br><img src="images/uart2_config.png">
+
+  - Enable Redirect to Printf is enabled for only one UART driver is checked.
+
+
+|Pin                       | Configuration      |
+| :---------------------:  | :----------------: |
+| RB5 (USART2 TX)          | Digital Output     |
+
+
+### 3.2 Demo
+
+<br><img src="images/ADC-READ.png">
+
+The figure above shows the messages received from the board during normal operation.
+
+### 3.3 Summary
+
+This program shows how to read the value of the voltage on VDDIO2 and send the information through USART. <br><br>
+[Back to top](#multi-voltage-input--output-mvio-in-three-different-examples-using-PIC18F56Q24-microcontroller-generated-with-mcc-melody)<br>
+
+## How to Program Curiosity Nano board
+
+This chapter shows how to use the MPLAB® X IDE to program an PIC® device with an Example_Project.X. This can be applied for any other projects.
+
+- Connect the board to the PC.
+
+- Open the Example_Project.X project in MPLAB X IDE.
+
+- Set the Example_Project.X project as main project.
+
+  - Right click on the project in the **Projects** tab and click **Set as Main Project**.
+    <br><img src="images/SET-AS-MAIN.png" width="600">
+
+- Clean and build the Example_Project.X project.
+
+  - Right click on the **Example_Project.X** project and select **Clean and Build**.
+    <br><img src="images/CLEAN-AND-BUILD.png" width="600">
+
+- Select the **PICxxxxx Curiosity Nano** in the Connected Hardware Tool section of the project settings:
+
+  - Right click on the project and click **Properties**
+  - Click on the arrow under the Connected Hardware Tool
+  - Select the **PICxxxxx Curiosity Nano** (click on the **SN**), click **Apply** and then click **OK**:
+    <br><img src="images/TOOL-AND-COMPILER.png" width="600">
+
+- Program the project to the board.
+  - Right click on the project and click **Make and Program Device**.
+    <br><img src="images/MAKE AND PROGRAM.png" width="600">
+
+- - -
+
+- [Back to 1. MVIO 1 Logic](#1-mvio-1-logic)
+- [Back to 2. MVIO Interrupt](#2-mvio-interrupt)
+- [Back to 3. MVIO Read Voltage](#3-mvio-read-voltage)
+- [Back to top](#multi-voltage-input--output-mvio-in-three-different-examples-using-PIC18F56Q24-microcontroller-generated-with-mcc-melody)
+
+- - -
+

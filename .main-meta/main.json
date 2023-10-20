@@ -4,10 +4,10 @@
     "content": {
         "metaDataVersion": "1.3.0",
         "name": "com.microchip.mcu8.mplabx.project.pic18f56q24-getting-started-with-mvio-mplab-mcc",
-        "version": " ",
-        "displayName": "",
+        "version": "1.0.0",
+        "displayName": "PIC18F56Q24 getting started with MVIO",
         "projectName": "pic18f56q24-getting-started-with-mvio-mplab-mcc",
-        "shortDescription": "This code example demonstrates 3 labs with MVIO on the pic18f56q24, these labs introduce MVIO outputs, demonstrates an interrupt routine, and shows how to measure the MVIO domain using the internal ADC.",
+        "shortDescription": "These labs help getting started with the new MVIO peripheral on PIC devices.",
         "ide": {
             "name": "MPLAB X",
             "semverRange": ">=6.15.0"
@@ -19,12 +19,12 @@
             }
         ],
         "dfp": {
-            "name": "",
-            "semverRange": ""
+            "name": "PIC18f-Q_DFP",
+            "semverRange": "^1.23.425"
         },
         "configurator": {
-            "name": "",
-            "semverRange": ""
+            "name": "MCC",
+            "semverRange": ">=5.3.7"
         },
         "device": {
             "metaDataVersion": "1.0.0",
@@ -37,8 +37,8 @@
             }
         },
         "author": "Dylan Turner",
-        "peripherals": [],
-        "keywords": [],
+        "peripherals": ["ADCC","UART","MVIO","GPIO"],
+        "keywords": ["Getting Started", "Melody", "Curiosity"],
         "additionalData": {
             "longDescription": {
                 "metaDataVersion": "1.0.0",
