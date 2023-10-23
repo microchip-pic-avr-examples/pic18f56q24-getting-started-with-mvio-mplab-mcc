@@ -7,7 +7,9 @@
 <br>The repository contains three MPLAB® X projects:
 
 [1. MVIO 1 Logic](#1-mvio-1-logic) This use case shows how to configure two output pins that provide different output voltage levels: 3.3V for a non-MVIO pin and 5V for an MVIO pin.
+
 [2. MVIO Interrupt](#2-mvio-interrupt) This use case shows how to configure the MVIO interrupt and turn on the on-board LED when the voltage drops below the acceptable threshold.
+
 [3. MVIO Read Voltage](#3-mvio-read-voltage) This use case shows how to read the voltage on VDDIO2 with the Analog-to-Digital Converter (ADC), and then send it through the Universal Asynchronous Receiver Transceiver (USART).
 
 ## Related Documentation
