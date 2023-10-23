@@ -2,13 +2,13 @@
 
 <a href="https://www.microchip.com" rel="nofollow"><img src="images/microchip.png" alt="MCHP" width="300"/></a>
 
-# Multi-Voltage Input / Output (MVIO) in three different examples using PIC18F56Q24 Microcontroller generated with MCC Melody
+# Multi-Voltage I/O (MVIO) in Three Different Examples Using PIC18F56Q24 Microcontroller Generated with MCC Melody
 
 <br>The repository contains three MPLAB® X projects:
 
-- [1. MVIO 1 Logic](#1-mvio-1-logic) This use case shows how to configure two output pins that provide different output voltage levels: 3.3V for a non-MVIO pin and 5V for an MVIO pin.
-- [2. MVIO Interrupt](#2-mvio-interrupt) This use case shows how to configure the MVIO interrupt and turn on the on-board LED when the voltage drops below the acceptable threshold.
-- [3. MVIO Read Voltage](#3-mvio-read-voltage) This use case shows how to read the voltage on VDDIO2 with the ADC, and then send it through USART.
+[1. MVIO 1 Logic](#1-mvio-1-logic) This use case shows how to configure two output pins that provide different output voltage levels: 3.3V for a non-MVIO pin and 5V for an MVIO pin.
+[2. MVIO Interrupt](#2-mvio-interrupt) This use case shows how to configure the MVIO interrupt and turn on the on-board LED when the voltage drops below the acceptable threshold.
+[3. MVIO Read Voltage](#3-mvio-read-voltage) This use case shows how to read the voltage on VDDIO2 with the Analog-to-Digital Converter (ADC), and then send it through the Universal Asynchronous Receiver Transceiver (USART).
 
 ## Related Documentation
 
@@ -27,13 +27,13 @@ More details and code examples on the PIC18F56Q24 can be found at the following 
 
 ## Hardware Used
 
-- The PIC18F56Q24 Curiosity Nano Development Board is used as test platform.
-  
+- The PIC18F56Q24 Curiosity Nano Development Board is used as a test platform.
+
 <br><img src="images/56Q24-Board.png">
 
 ## Prerequisites
 
-For MVIO to work in case the Curiosity Nano board is used for these examples, disconnect the R201 resistor connecting VDDIO2 to VCC_TARGET.
+For MVIO to work together with the Curiosity Nano board, disconnect the R201 resistor connecting VDDIO2 to VCC_TARGET.
 
 <br><img src="images/56Q24-MVIO-BOARD.png">
 
@@ -41,38 +41,38 @@ A power supply must be connected to the VDDIO2 pin. There are two possible use c
 <br />
 **a.** Connecting an external DC power supply to the VDDIO2 pin and GND.
 <br />
-**b.** Using Curiosity Nano, use VBUS as power supply, simply by connecting a wire between VBUS and VDDIO2.
+**b.** Using Curiosity Nano, use V<sub>BUS</sub> as power supply, simply by connecting a wire between V<sub>BUS</sub> and VDDIO2.
 
-## INITIAL SETUP
+## Initial Setup
 
 These following configurations are set for each lab.
 
 <br><img src="images/CLOCK-CONFIG.png">
-  
-  - Clock Source: HFINTOSC 
-  - Internal Clock: 4 Mhz
+
+  - Clock Source: HFINTOSC
+  - Internal Clock: 4 MHz
   - Clock Divider: 1
-    
+
 <br><img src="images/CONFIG1.png">
 
-  - External Oscillator Disabled
-  - Reset Oscillator 4 Mhz
+  - External Oscillator: Disabled
+  - Reset Oscillator: 4 MHz
 
 ## Operation
 
-To program the Curiosity Nano board with this MPLAB® X project, follow the steps provided in the [How to Program Curiosity Nano board](#how-to-program-curiosity-nano-board) chapter.<br><br>
+To program the Curiosity Nano board with this MPLAB X project, follow the steps provided in the [How to Program the Curiosity Nano board](#how-to-program-the-curiosity-nano-board) chapter.<br><br>
 
 ## 1. MVIO 1 Logic
 
-This program demonstrates the functionality of the MVIO pins of the PIC®  microcontrollers. It configures two output high (logic `1`) pins; one is an MVIO pin and the other one is a non-MVIO. 
+This program demonstrates the functionality of the MVIO pins of the PIC®  microcontrollers (MCUs). It configures two output high (logic `1`) pins; one is an MVIO pin, and the other one is a non-MVIO.
 
-**Note**: VDDIO2 is connected to VBUS on the PIC Curiosity Nano board.
+**Note**: VDDIO2 is connected to V<sub>BUS</sub> on the PIC Curiosity Nano board.
 
-By using a voltmeter, it can be observed that the microcontroller is generating 3.3V on the non-MVIO pin and 5V on the MVIO pin. 
+When using a voltmeter, the MCU generates 3.3V on the non-MVIO pin, and 5V on the MVIO pin.
 
-This simple example uses the pins as GPIO pins but other peripherals (such as I<sup>2</sup>C, SPI, USART, Timers and so on) would also have different voltage values for logic `1`, on MVIO and non-MVIO pins. 
+This example uses GPIO pins with different peripherals, such as, I<sup>2</sup>C, SPI, USART, Timers. Therefore, the voltage values for logic `1`, on MVIO and non-MVIO pins, differ.
 
-This adds a lot of flexibility to the PIC® family, allowing the devices to communicate with sensors/MPUs/SoCs at different operating levels, without needing external components such as level shifters.
+This adds a lot of flexibility to the PIC family, allowing the devices to communicate with sensors/MPUs/SoCs at different operating levels, without needing external components, such as level shifters.
 
 ### 1.1 Setup
 
@@ -86,7 +86,7 @@ This adds a lot of flexibility to the PIC® family, allowing the devices to comm
 
 <br><img src="images/LOGIC.gif">
 
-This gif shows the output voltage levels on the non-MVIO pin (3.3V) and on the MVIO pin (5V).
+This gif shows the output voltage levels on the non-MVIO pin, 3.3V, and on the MVIO pin, 5V.
 
 ### 1.3 Summary
 
@@ -95,13 +95,13 @@ This program demonstrates the difference between the MVIO and non-MVIO pins, bot
 
 ## 2. MVIO Interrupt
 
-This program demonstrates the functionality of the MVIO status interrupt. 
+This program demonstrates the functionality of the MVIO status interrupt.
 
 **Note**: VDDIO2 is connected to an external and adjustable power supply.
 
-When the VDDIO2 voltage level falls below the acceptable threshold (of about 1.6V-5.5V), the status bit changes and an interrupt is issued. When the VDDIO2 voltage raises above the threshold, the status bit will change again, issuing another interrupt.
+When the VDDIO2 voltage level falls below the acceptable threshold, about 1.6V-5.5V, the Status bit changes and an interrupt is issued. When the VDDIO2 voltage raises above the threshold, the status bit will change again, issuing another interrupt.
 
-For this example, the on-board LED is turned on as long as the voltage is outside the threshold and turned off when the VDDIO2 is inside the threshold. 
+For this example, the on-board LED is turned on as long as the voltage is outside the threshold, and turned off when the VDDIO2 is inside the threshold.
 
 ### 2.1 Setup
 
@@ -111,7 +111,7 @@ For this example, the on-board LED is turned on as long as the voltage is outsid
 
 
 
-This example requires the RDY interuppt to be enabled, which can be done in the interrupt tab in MCC, or enabled by code.
+This example requires the RDY interrupt to be enabled, which can be done in the interrupt tab in MCC, or enabled by code.
 
 ### MCC
 
@@ -120,7 +120,7 @@ This example requires the RDY interuppt to be enabled, which can be done in the 
 The figure above shows what it looks like when the RDY interrupt is enabled.
 
 ### Code
-To implement using code the following lines were added. An ISR and an Interrupt Manager.
+To implement using code, an Interrupt Service Routine (ISR) and Interrupt manager were added.
 
 ```
 static void MVIO_ISR(void)
@@ -134,12 +134,12 @@ static void MVIO_ISR(void)
   {
     /* Check if MVIO_RDY interrupt is enabled and if the interrupt flag is set */
     if(PIE11bits.VDDIO2nRDYIE == 1 && PIR11bits.VDDIO2nRDYIF == 1)
-    
+
     {
         PIR11bits.VDDIO2nRDYIF = 0;
         MVIO_ISR();
        __delay_ms(50);
-        
+
     }
   }
 ```
@@ -150,7 +150,7 @@ static void MVIO_ISR(void)
 
 <br><img src="images/INTERRUPT.gif">
 
-<br> This gif shows what happens when the VDDIO2 voltage drops below the MVIO threshold. In this example, a wire is placed between the VDDIO2 and the VBUS, that is used as a power supply (5V) - the LED is turned off. The wire is then unplugged (0V) - the LED is turned on.
+<br> This gif shows what happens when the VDDIO2 voltage drops below the MVIO threshold. In this example, a wire is placed between the VDDIO2 and the V<sub>BUS</sub>, that is used as a power supply (5V) - the LED is turned off. The wire is then unplugged (0V) - the LED is turned on.
 
 ### 2.3 Summary
 
@@ -159,7 +159,7 @@ This program demonstrates the use of the MVIO interrupt to turn on an LED when t
 
 ## 3. MVIO Read Voltage
 
-This program reads the voltage on VDDIO2 using an internal ADC channel connected to it. 
+This program reads the voltage on VDDIO2 using an internal ADC channel connected to it.
 
 It is possible that the ADC operates at a voltage lower than the MVIO. To be able to handle such cases, the ADC channel connected to MVIO provides the VDDIO2 voltage divided by 10. This means that the ADC measures a voltage ten times smaller than the actual voltage, this way it can safely handle the case when VDDIO2 is greater than VDD.
 
@@ -167,28 +167,28 @@ It is possible that the ADC operates at a voltage lower than the MVIO. To be abl
 <br />
 **a.** Connecting an external DC power supply to the VDDIO2 pin and GND.
 <br />
-**b.** Using Curiosity Nano, use VBUS as power supply, simply by connecting a wire between VBUS and VDDIO2. 
+**b.** Using Curiosity Nano, use V<sub>BUS</sub> as power supply, simply by connecting a wire between V<sub>BUS</sub> and VDDIO2.
 
-The program than converts the reading into the actual voltage and sends it over USART, every 500ms.
+The program converts the reading into voltage, and sends it to USART every 500 ms.
 
 ## 3.1 Setup
 
 <br><img src="images/ADC-CONFIG.png">
-  
+
   - Basic Mode
   - Right Alignment
   - Positive Input Channel: VDDIO2_by_10
   - Clock Source: ADCRC
 
-    
+
 
 <br><img src="images/uart2_plib_config.png">
- 
+
  - UART dependency: UART 2
-  
+
 <br><img src="images/uart2_config.png">
 
-  - Enable Redirect to Printf is enabled for only one UART driver is checked.
+  - Enable Redirect to Printf is enabled for only one UART driver.
 
 
 |Pin                       | Configuration      |
@@ -207,7 +207,7 @@ The figure above shows the messages received from the board during normal operat
 This program shows how to read the value of the voltage on VDDIO2 and send the information through USART. <br><br>
 [Back to top](#multi-voltage-input--output-mvio-in-three-different-examples-using-PIC18F56Q24-microcontroller-generated-with-mcc-melody)<br>
 
-## How to Program Curiosity Nano board
+## How to Program the Curiosity Nano board
 
 This chapter shows how to use the MPLAB® X IDE to program an PIC® device with an Example_Project.X. This can be applied for any other projects.
 
@@ -244,4 +244,3 @@ This chapter shows how to use the MPLAB® X IDE to program an PIC® device with 
 - [Back to top](#multi-voltage-input--output-mvio-in-three-different-examples-using-PIC18F56Q24-microcontroller-generated-with-mcc-melody)
 
 - - -
-
