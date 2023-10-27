@@ -64,7 +64,8 @@ These following configurations are set for each lab.
 
 ## Operation
 
-To program the Curiosity Nano board with this MPLAB X project, follow the steps provided in the [Programming Chapter](#how-to-program-the-curiosity-nano-board) chapter.<br>
+To program the Curiosity Nano board with this MPLAB X project, follow the steps provided in the [How to Program the Curiosity Nano board](#how-to-program-the-curiosity-nano-board) chapter.
+
 
 ## 1. MVIO Logic Level Demonstration
 
