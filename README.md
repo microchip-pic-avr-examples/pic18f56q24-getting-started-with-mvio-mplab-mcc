@@ -98,13 +98,13 @@ The first part of this program, demonstrates the differences and key new feature
 
 ## 2. MVIO Interrupt
 
-This program demonstrates the functionality of the MVIO `VDDIO2nRDYIE` interrupt.
+This program demonstrates the functionality of the MVIO `VDDIO2nRDYIF` and `VDDIO2nLVDIF`
 
-**Note**: V<sub>DDIO2</sub> is connected to an external and adjustable power supply.
+**Note**: V<sub>DDIO2</sub> is connected to an external and adjustable power supply in the LVD lab, but connected to V<sub>BUS</sub> on the RDY lab.
 
-When the V<sub>DDIO2</sub> voltage level falls out of the acceptable threshold, about 1.6V-5.5V, the RDY bit changes and an interrupt is issued. When the V<sub>DDIO2</sub> voltage goes back to the threshold, the RDY bit will change again, signaling the interrupt event is over. This is a level triggered interrupt, meaning it doesn't measure on the rising or falling edge, rather it is measured by the amplitude or level.
+Further explanation of these interrupts are further along within this demonstration. These interrupts are different than the normal edge trigger interrupts typically used in PIC®MCU  devices. It should be noted that these interrupt flags will not be unset if instructed to, they will be constantly set back to high/low depending on the conditions. To avoid an ISR loop it is recommended to disable the interrupts after an expected event and monitor the status bits instead. The status bits are `VDDIO2CONbits.RDY` and `VDDIO2CONbits.LVDSTAT` these bits are the same values as the interrupt flags except you can monitor them without needing to monitor the interrupt flag.
 
-For this example, the on-board LED is turned on as long as the voltage is outside the threshold, and turned off when the V<sub>DDIO2</sub> is inside the threshold.
+
 
 ### 2.1 Setup
 
@@ -114,21 +114,16 @@ For this example, the on-board LED is turned on as long as the voltage is outsid
 
 
 
-This example requires the RDY interrupt to be enabled, which can be done in the interrupt tab in MCC, or enabled by code.
-
-### MCC
-
-<br><img src="images/INTERRUPT-TABLE.png">
-
-the figure above provides a screenshot illustrating what it should look like when the VDDIO2RDYIF is enabled in MCC
+This example requires the interrupts to be enabled, which can be enabled by code.
 
 ### Code
-To implement using code, an Interrupt Service Routine (ISR) and Interrupt manager were added.
+To implement using code, an Interrupt Service Routine (ISR) and Interrupt manager were added. These following examples are related to the RDY interrupt and flag, but can be changed to LVD if you change the appropriate registers within the interrupt manager.
 
 ```
 static void MVIO_ISR(void)
 {                  
-    LATFbits.LATF2 = 0;   
+  /* Turn on LED0 to indicate VDDIO2 is below voltage */
+  LATFbits.LATF2 = 0;   
 }
 ```
 
@@ -149,6 +144,8 @@ static void MVIO_ISR(void)
 
 
 
+
+
 ### 2.2 Demo
 | Interrupt Demo | Expected Plot|
 |----------|-----------|
@@ -164,7 +161,7 @@ static void MVIO_ISR(void)
 
 <br> This gif shows the LVD interrupt being used, this is done by manipulating the voltage on V<sub>DDIO2</sub>. The LVD flag is set once the MVIO voltage domain is under the user dictated boundary (2.2V in the GIF).
 
-<br> In this demonstration the the V<sub>DDIO2</sub> is being manipulated by the DC power supply. The interrupt turns the LED off, so once the voltage goes under 2.2V the LED will go from active to off. The device will be held inside the interrupt until the voltage is higher than the LVD voltage. Logic operations are pictured in the plot next to the demonstration.
+<br> In this demonstration the interrupt is the LED off. Logic operations are pictured in the plot next to the demonstration.
 
 ### 2.3 Summary
 
@@ -183,7 +180,7 @@ It is possible that the ADC operates at a voltage lower than the MVIO. To be abl
 <br />
 **b.** Using Curiosity Nano, use V<sub>BUS</sub> as power supply, simply by connecting a wire between V<sub>BUS</sub> and V<sub>DDIO2</sub>.
 
-The program converts the reading into voltage, and sends it to USART every 500 ms.
+This program will use the ladder. The program will take voltage from the DC power supply, and by using the internal ADC, the MVIO pin voltage can be monitored and displayed using UART every 500 ms.
 
 ## 3.1 Setup
 
