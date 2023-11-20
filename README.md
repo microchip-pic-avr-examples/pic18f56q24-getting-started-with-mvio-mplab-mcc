@@ -154,14 +154,17 @@ static void MVIO_ISR(void)
 |----------|-----------|
 |<br><img src="images/INTERRUPT.gif" width = "600">|<br><img src="images/RDY PLOT.png" width = "600">|
 
-<br> This gif shows what happens during a
+<br> This gif shows a RDY interrupt being initiated, this is done by applying V<sub>BUS</sub> to V<sub>DDIO2</sub>. On launch, the RDY flag is set to high to signify the MVIO is not ready. The RDY flag is unset once the V<sub>DDIO2</sub> domain reaches the acceptable MVIO threshold, for the Q24, the threshold is 1.6V to 5.5V. This means the device is held in an interrupt state until the MVIO Domain is ready.  
+
+<br> In this demonstration the interrupt is the LED is stuck High until the MVIO is ready. Logic operations are pictured in the plot next to the demonstration.
 
 | Interrupt Demo | Expected Plot|
 |----------|-----------|
 |<br><img src="images/LVD INT.gif" width = "600">|<br><img src="images/LVD PLOT.png" width = "600">|
 
-<br> This gif shows what happens when the V<sub>DDIO2</sub> voltage drops below the user's set LVD boundary
+<br> This gif shows the LVD interrupt being used, this is done by manipulating the voltage on V<sub>DDIO2</sub>. The LVD flag is set once the MVIO voltage domain is under the user dictated boundary (2.2V in the GIF).
 
+<br> In this demonstration the the V<sub>DDIO2</sub> is being manipulated by the DC power supply. The interrupt turns the LED off, so once the voltage goes under 2.2V the LED will go from active to off. The device will be held inside the interrupt until the voltage is higher than the LVD voltage. Logic operations are pictured in the plot next to the demonstration.
 
 ### 2.3 Summary
 
