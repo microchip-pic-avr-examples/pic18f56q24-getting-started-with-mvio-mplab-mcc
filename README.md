@@ -209,7 +209,7 @@ This program will use the ladder. The program will take voltage from the DC powe
 
 ### 3.2 Demo
 
-<br><img src="images/ADC-READ.png">
+<br><img src="images/ADC-READ.png" width = "300">
 
 The figure above shows the messages received from the board during normal operation.
 
@@ -229,12 +229,12 @@ This chapter shows how to use the MPLAB® X IDE to program an PIC® device with 
 - Set the Example_Project.X project as main project.
 
   - Right click on the project in the **Projects** tab and click **Set as Main Project**.
-    <br><img src="images/SET-AS-MAIN.png" width="600">
+    <br><img src="images/SET-AS-MAIN.png" width="300">
 
 - Clean and build the Example_Project.X project.
 
   - Right click on the **Example_Project.X** project and select **Clean and Build**.
-    <br><img src="images/CLEAN-AND-BUILD.png" width="600">
+    <br><img src="images/CLEAN-AND-BUILD.png" width="300">
 
 - Select the **PICxxxxx Curiosity Nano** in the Connected Hardware Tool section of the project settings:
 
