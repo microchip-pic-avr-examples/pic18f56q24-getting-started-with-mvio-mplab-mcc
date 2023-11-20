@@ -209,7 +209,7 @@ This program will use the ladder. The program will take voltage from the DC powe
 
 ### 3.2 Demo
 
-<br><img src="images/ADC-READ.png" width = "300">
+<br><img src="images/ADC-READ.png" width = "500">
 
 The figure above shows the messages received from the board during normal operation.
 
