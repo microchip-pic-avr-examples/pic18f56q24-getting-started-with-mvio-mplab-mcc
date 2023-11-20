@@ -39,8 +39,8 @@
 
 void VDDIO2_Initialize(void)
 {
-    //MODE enabled; HYSDIS disabled; LVD 3.20V; 
-    VDDIO2CON = 0x1A;
+    //MODE enabled; HYSDIS disabled; LVD 2.20V; 
+    VDDIO2CON = 0x12;
 }
 
 void VDDIO2_LVDSet(LVD_TRIP_POINTS trip_point)

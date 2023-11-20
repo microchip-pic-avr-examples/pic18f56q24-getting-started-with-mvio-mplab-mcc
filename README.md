@@ -150,10 +150,16 @@ static void MVIO_ISR(void)
 
 
 ### 2.2 Demo
+| Interrupt Demo | Expected Plot|
+|----------|-----------|
+|<br><img src="images/INTERRUPT.gif">|<br><img src="images/INTERRUPT.gif">|
 
-<br><img src="images/INTERRUPT.gif">
+<br> This gif shows what happens during a
 
-<br> This gif shows what happens when the V<sub>DDIO2</sub> voltage drops below the MVIO threshold. In this example, a wire is placed between the V<sub>DDIO2</sub> and the V<sub>BUS</sub>, that is used as a power supply (5V) - the LED is turned off. The wire is then unplugged (0V) - the LED is turned on.
+<br><img src="images/LVD INT.gif">
+
+<br> This gif shows what happens when the V<sub>DDIO2</sub> voltage drops below the user's set LVD boundary
+
 
 ### 2.3 Summary
 
