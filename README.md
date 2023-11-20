@@ -152,13 +152,13 @@ static void MVIO_ISR(void)
 ### 2.2 Demo
 | Interrupt Demo | Expected Plot|
 |----------|-----------|
-|<br><img src="images/INTERRUPT.gif">|<br><img src="images/RDY PLOT.png">|
+|<br><img src="images/INTERRUPT.gif" width = "600">|<br><img src="images/RDY PLOT.png" width = "600">|
 
 <br> This gif shows what happens during a
 
 | Interrupt Demo | Expected Plot|
 |----------|-----------|
-|<br><img src="images/LVD INT.gif">|<br><img src="images/LVD PLOT.png">|
+|<br><img src="images/LVD INT.gif" width = "600">|<br><img src="images/LVD PLOT.png" width = "600">|
 
 <br> This gif shows what happens when the V<sub>DDIO2</sub> voltage drops below the user's set LVD boundary
 
