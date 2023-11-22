@@ -100,10 +100,13 @@ The first part of this program, demonstrates the differences and key new feature
 
 This program demonstrates the functionality of the MVIO `VDDIO2nRDYIF` and `VDDIO2nLVDIF`
 
+**Note**: The RDY flag has an inverse logic and acts more as an UNREADY flag, this is not the case for the LVD interrupt. Logic plots are labeled with the demonstration below.
+
 **Note**: V<sub>DDIO2</sub> is connected to an external and adjustable power supply in the LVD lab, but connected to V<sub>BUS</sub> on the RDY lab.
 
-Further explanation of these interrupts are further along within this demonstration. These interrupts are different than the normal edge trigger interrupts typically used in PIC®MCU  devices. It should be noted that these interrupt flags will not be unset if instructed to, they will be constantly set back to high/low depending on the conditions. To avoid an ISR loop it is recommended to disable the interrupts after an expected event and monitor the status bits instead. The status bits are `VDDIO2CONbits.RDY` and `VDDIO2CONbits.LVDSTAT` these bits are the same values as the interrupt flags except you can monitor them without needing to monitor the interrupt flag.
 
+
+These interrupts are explained further along within this demonstration. The MVIO module interrupts are level triggered, rather than the typical edge triggered interrupts. It should be noted that these interrupt flags will continuously be set as long as the event causing the interrupt continues to occur. To avoid an ISR loop it is recommended to disable the interrupts after the interrupt flag initially gets set, and then monitor the corresponding status bits to determine when the MVIO supply has been restored.. The status bits are `VDDIO2CONbits.RDY` and `VDDIO2CONbits.LVDSTAT`.
 
 
 ### 2.1 Setup
@@ -153,7 +156,7 @@ static void MVIO_ISR(void)
 
 <br> This gif shows a RDY interrupt being initiated, this is done by applying V<sub>BUS</sub> to V<sub>DDIO2</sub>. On launch, the RDY flag is set to high to signify the MVIO is not ready. The RDY flag is unset once the V<sub>DDIO2</sub> domain reaches the acceptable MVIO threshold, for the Q24, the threshold is 1.6V to 5.5V. This means the device is held in an interrupt state until the MVIO Domain is ready.  
 
-<br> In this demonstration the interrupt is the LED is stuck High until the MVIO is ready. Logic operations are pictured in the plot next to the demonstration.
+<br> In this demonstration the interrupt service routine turns the on board LED on until the V<sub>DDIO2</sub> voltage domain is ready.
 
 | Interrupt Demo | Expected Plot|
 |----------|-----------|
@@ -161,7 +164,7 @@ static void MVIO_ISR(void)
 
 <br> This gif shows the LVD interrupt being used, this is done by manipulating the voltage on V<sub>DDIO2</sub>. The LVD flag is set once the MVIO voltage domain is under the user dictated boundary (2.2V in the GIF).
 
-<br> In this demonstration the interrupt is the LED off. Logic operations are pictured in the plot next to the demonstration.
+<br> In this demonstration the interrupt service routine turns the LED off. Logic operations are pictured in the plot next to the demonstration.
 
 ### 2.3 Summary
 
