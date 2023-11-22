@@ -150,6 +150,9 @@ static void MVIO_ISR(void)
 
 
 ### 2.2 Demo
+
+## RDY Interrupt
+
 | Interrupt Demo | Expected Plot|
 |----------|-----------|
 |<br><img src="images/INTERRUPT.gif" width = "600">|<br><img src="images/RDY PLOT.png" width = "600">|
@@ -157,6 +160,8 @@ static void MVIO_ISR(void)
 <br> This gif shows a RDY interrupt being initiated, this is done by applying V<sub>BUS</sub> to V<sub>DDIO2</sub>. On launch, the RDY flag is set to high to signify the MVIO is not ready. The RDY flag is unset once the V<sub>DDIO2</sub> domain reaches the acceptable MVIO threshold, for the Q24, the threshold is 1.6V to 5.5V. This means the device is held in an interrupt state until the MVIO Domain is ready.  
 
 <br> In this demonstration the interrupt service routine turns the on board LED on until the V<sub>DDIO2</sub> voltage domain is ready.
+
+## LVD Interrupt
 
 | Interrupt Demo | Expected Plot|
 |----------|-----------|
